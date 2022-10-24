@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors Lizard Spock</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="relative overflow-hidden bg-gray-800">
+    <div class="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
+      <svg class="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-gray-700 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none" width="364" height="384" viewBox="0 0 364 384" fill="none">
+        <defs>
+          <pattern id="eab71dd9-9d7a-47bd-8044-256344ee00d0" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="364" height="384" fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)" />
+      </svg>
+    </div>
+    <div class="relative pt-6 pb-16 sm:pb-24">
+      <Popover>
+        <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6" aria-label="Global">
+          <div class="flex flex-1 items-center">
+            <div class="flex w-full items-center justify-between md:w-auto">
+              <h1 class="mx-auto text-2xl text-gray-200">
+                Rock, Paper, Scissors, Lizard, Spock
+              </h1>
+              <div class="-mr-2 flex items-center md:hidden">
+                
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <transition enter-active-class="duration-150 ease-out" enter-from-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100" leave-active-class="duration-100 ease-in" leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
+          <PopoverPanel focus class="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden">
+            <div class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
+              <div class="flex items-center justify-between px-5 pt-4">
+                <div>
+                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                </div>
+                <div class="-mr-2">
+                  <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <span class="sr-only">Close menu</span>
+                    <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                  </PopoverButton>
+                </div>
+              </div>
+              <div class="space-y-1 px-2 pt-2 pb-3">
+                <a v-for="item in navigation" :key="item.name" :href="item.href" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">{{ item.name }}</a>
+              </div>
+              <a href="#" class="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100">Log in</a>
+            </div>
+          </PopoverPanel>
+        </transition>
+      </Popover>
+
+      <main class="mt-16 sm:mt-24">
+        <div class="mx-auto max-w-7xl">
+          <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            <div class="px-4 sm:px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
+              <ul>
+
+              </ul>
+              <form action="submit">
+                <!-- <input type="text" class="p-1 rounded-lg" placeholder="Message"> -->
+                <select name="" id="">
+                  <option value="">Rock</option>
+                  <option value="">Paper</option>
+                  <option value="">Scissors</option>
+                  <option value="">Lizard</option>
+                  <option value="">Spock</option>
+                </select>
+                <button class="bg-gray-600 text-gray-100 p-1 ">
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <!-- <div class="container bg-gray-800">
+    Hello, World
+    <ul>
+
+    </ul>
+    <form action="submit">
+      <input type="text" class="" placeholder="Message">
+      <button>
+        Send
+      </button>
+    </form>
+  </div> -->
+  <script>
+    const socket = io();
+
+    const form = document.getElementById("form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      socket.emit('type', input.value)
+    })
+  </script>
+</body>
+</html>

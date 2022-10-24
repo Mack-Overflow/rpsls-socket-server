@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Student Log</title>
+    <!-- https://www.uvu.edu/web/support/300-design-format/301-approved-colors.html UVU official colors -->
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primaryGreen: '#275d38';
+              grey: '#e8e8e8';
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body onload="pageLoaded()" id="pageBody" class="bg-gray-800">
+    <div class="container rounded-lg mx-4 my-4 bg-gray-400 w-96">
+      <!-- TODO: use a custom favicon"-->
+      <img
+        rel="icon"
+        type="image/x-icon"
+        href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"
+        class="hidden h-6 w-6"
+      />
+      <!-- TODO: Set one button for dark mode, one button for UVU mode -->
+      <button class="" id="uvuColorBtn" onclick="uvuColorTheme">
+        UVU Color Mode
+      </button>
+      <button id="darkColorBtn" onclick="darkColorTheme">Dark Mode</button>
+      <button id="lightColorBtn" onclick="lightColorTheme">Light Mode</button>
+      <form class="mx-3 my-3">
+        <label for="course" class="font-bold ml-1 pt-2 flex"
+          >Course Selection</label
+        >
+        <select
+          aria-label="Select Course"
+          id="course"
+          name="course"
+          data-cy="course_select"
+          class="dropdown mb-2 rounded-lg py-1"
+        >
+          <option selected value="">Choose Course</option></select
+        ><br />
+
+        <div id="idContainer" class="hidden">
+          <label for="uvuId" class="font-bold ml-1">UVU ID</label><br />
+
+          <input
+            type="number"
+            id="uvuId"
+            placeholder="10234567"
+            name="uvuId"
+            data-cy="uvuId_input"
+            class="rounded-lg py-1 mb-4"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            maxlength="8"
+          />
+
+          <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay"></h3>
+        </div>
+
+        <ul data-cy="logs">
+          <!-- TODO: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
+          <!-- <li>
+            <div><small>1/23/2021 1:23:36 PM</small></div>
+            <pre class="hidden"><p>Initial comment. Hello World</p></pre>
+          </li> -->
+        </ul>
+
+        <div class="my-4">
+          <label class="font-bold ml-1">New Log</label><br />
+          <textarea
+            aria-label="add log textarea"
+            data-cy="log_textarea"
+            class="rounded-xl"
+          ></textarea
+          ><br />
+
+          <div class="hidden" id="submitBtnContainer">
+            <button
+              type="submit"
+              data-cy="add_log_btn"
+              id="submitLogBtn"
+              class="
+                mt-1
+                text-white
+                font-bold
+                px-4
+                bg-blue-600
+                hover:bg-blue-800
+                rounded-md
+                py-1
+                mb-4
+              "
+            >
+              Add Log
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="jQl.js" charset="utf8"></script>
+    <script type="text/javascript" src="script.js" charset="utf8"></script>
+  </body>
+</html>
+
+<!-- TODO: move all TODOs that done above to down below here and change the label to DONE:. -->
+<!-- TODO: set the characterset to utf8 -->
+<!-- TODO: add appropriate comments you feel are necessary, if any, for the next coder to understand -->
+<!-- TODO: Script tag to your javascript file -->
+<!-- DONE: Only numbers, no letters or other characters-->
+<!-- DONE: write `10234567` as sample data on the input field below  -->
+<!-- TODO: Don't show the uvu id text input box until a course was selected above. -->
+<!-- TODO: If course ever becomes unselected, don't show the uvu id text input box.-->
+<!-- TODO: The following options are currently static values to show you an example.  -->
+<!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
+<!-- DONE: Replace CSS with Tailwind CDN -->
+<!-- TODO: The following options are currently static values to show you sample data.  -->
+<!-- Use fetch to replace them with dynamic data from GET https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses -->
+<!-- Use your own unique URL you recorded, not the sample one above. -->
+<!-- TODO: set the lang attribute to American English -->
+<!-- TODO: Button should be disabled until there are logs displayed -->
+<!-- TODO: Ensure the character length never exceeds 8 -->
+<!-- TODO: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
+
+<!-- NOTE: The TODOs are listed in index.html -->
