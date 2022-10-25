@@ -13,7 +13,7 @@ const { Server } = require('socket.io');
 const io = require("socket.io")(httpServer, {
     // ...
 });
-const PORT = 3001;
+const PORT = 3002;
 const rpsls = require('./rpsls');
 
 // M I D D L E  W A R E
@@ -43,8 +43,10 @@ io.on('connection', (socket) => {
     socket.on('joinGame', (s) => {
         // If a player is currently in connections queue, start game
         if (connectionsQueue.length === 1) {
+            connectionsQueue.push(s);
             console.log('2 players are ready!');
-            rpsls.handleStartGame();
+            let handleGame = rpsls.handleStartGame(connectionsQueue);
+            connectionsQueue = [];
         } else {
             console.log("1 player is ready");
             connectionsQueue.push(s)
@@ -134,4 +136,4 @@ app.put('/update', (req, res) => {
     
 }); // Update
 
-httpServer.listen(3002);
+httpServer.listen(3030);

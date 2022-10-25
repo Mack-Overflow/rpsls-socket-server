@@ -57,8 +57,12 @@ module.exports = {
     handleLogin: function(inputBits) {
 
     },
-    handleStartGame: function(players) {
-        
+    handleStartGame: function(playersArray) {
+        console.log(playersArray);
+        let player1Id = this.binString2Dec(playersArray[0].slice(4));
+        let player2Id = this.binString2Dec(playersArray[1].slice(4));
+
+        console.log(player2Id);
     },
     isolateBits: function() {
         let x = 0b00000100;
