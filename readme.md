@@ -1,2 +1,4 @@
 Runs on Port 3001
-Running: "node ." or "nodemon ."
+Running:
+1) Npm install
+2) "node ." or "nodemon ."

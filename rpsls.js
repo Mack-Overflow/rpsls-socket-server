@@ -54,8 +54,11 @@ module.exports = {
     getFirstFive: function(w) {
         return w & 0b00011111;
     },
-    handleLogin: function() {
+    handleLogin: function(inputBits) {
 
+    },
+    handleStartGame: function(players) {
+        
     },
     isolateBits: function() {
         let x = 0b00000100;

@@ -22,7 +22,7 @@ app.use(logger('dev'));
 // Internal Middleware
 // app.use(express.static('public'));
 // External Middleware
-let connections = [];
+let connectionsQueue = [];
 
 io.on('connection', (socket) => {
     // Fat arrow will elimate global var usage
@@ -33,11 +33,24 @@ io.on('connection', (socket) => {
     // Set 5 second timer before connecting bot, calling botSpike.js
     socket.on('command', (s) => {
         let currentResponse = rpsls.processInput(s)
-        // console.log(response);
+        // connections.push(currentResponse);
     })
 
     socket.on('login', (s) => {
         rpsls.handleLogin(s);
+    })
+
+    socket.on('joinGame', (s) => {
+        // If a player is currently in connections queue, start game
+        if (connectionsQueue.length === 1) {
+            console.log('2 players are ready!');
+            rpsls.handleStartGame();
+        } else {
+            console.log("1 player is ready");
+            connectionsQueue.push(s)
+            console.log(connectionsQueue);
+        }
+        // Otherwise, add player to queue and wait for 2nd connection
     })
 
     // socket.on('move', (s) =>{
@@ -68,9 +81,6 @@ io.on('connection', (socket) => {
     //     // console.log('chat message: ' + msg);
     //     // socket.broadcast.emit('chat message', 'hi'); // Emits to all sockets
     // });
-    socket.on('decision', (msg) => {
-        console.log(`Decision: ${msg}`);
-    })
 
 })
 
