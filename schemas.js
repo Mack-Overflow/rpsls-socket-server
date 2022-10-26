@@ -23,6 +23,8 @@ usersSchema.methods.win = function win() {
     this.save();
 };
 
+
+
 const User = mongoose.model('User', usersSchema);
 let user1 = User.findById(1);
 console.log(user1);
