@@ -103,37 +103,31 @@ function gracefulShutdown() {
  * A P I  R O U T E S
  */
 
-// Gets all the Courses
-app.get('/api/v1/courses', (req, res, err) => {
-    // const { courseId, uvuId } = req.query;
-    
-    res.send(`GET Courses: ${courseId} ${uvuId}`);
-});
+app.post('/api/register', (req, res, err) => {
+    const { displayName, email, password } = req.query;
+    // User model creation
 
-// Gets all the logs
-app.get('/api/v1/logs', (req, res, err) => {
-    const { courseId, uvuId } = req.query;
-    res.send(`GET Logs: ${courseId} ${uvuId}`);
-});
+    res.send({success: true, data: {} });
+})
+app.post('/api/login', (req, res, err) => {
+    // User model retrieval
 
-// app.get('/socket.io/', (req, res) => {
-//     // console.log(req);
-//     console.log("HITTINGGGGG HERRRREEEEE");
-// });
+    const { email, password } = req.query;
 
-// REST CALLS
-app.post('/store', (req, res) => { 
+    res.send({success: true, data: {player: Player }})
+})
+app.get('/api/game', (req, res, err) => {
+    // Game model retrieval (all)
+})
+app.put('/api/game/join', (req, res, err) => {
+    const { player, room } = req.query;
+    // Add playerId to room
+})
+app.put('/api/game/watch', (req, res, err) => {
+    const { player, room } = req.query;
+    // Add playerId to room as commentator
+})
 
-}); // Create
 
-app.post('/', (req, res) => {
-    // Debug the request data
-    // Alter DBa
-    // Write to 
-});
-
-app.put('/update', (req, res) => {
-    
-}); // Update
 
 httpServer.listen(3030);
